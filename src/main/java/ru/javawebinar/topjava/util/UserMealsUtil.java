@@ -3,12 +3,15 @@ package ru.javawebinar.topjava.util;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExcess;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class UserMealsUtil {
     public static void main(String[] args) {
@@ -25,10 +28,10 @@ public class UserMealsUtil {
 //        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
 //        mealsTo.forEach(System.out::println);
 
-        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
-        mealsTo.forEach(System.out::println);
+//        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
+//        mealsTo.forEach(System.out::println);
 
-//        System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
+        System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
     }
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
@@ -58,7 +61,16 @@ public class UserMealsUtil {
 
     public static List<UserMealWithExcess> filteredByStreams(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         // TODO Implement by streams
-        System.out.println("TODO Implement by streams");
+        List<UserMeal> mealsTo = new ArrayList<>();
+        List<UserMeal> ofCalories = new ArrayList<>();
+
+        Map<LocalDateTime, Integer> map5 = meals.stream()
+                .collect(Collectors.groupingBy(UserMeal::getDateTime,
+                        Collectors.summingInt(UserMeal::getCalories)));
+
+        meals.stream().filter(m -> TimeUtil.isBetweenHalfOpen(LocalTime.of(m.getDateTime().getHour(),m.getDateTime().getMinute()),
+                startTime,endTime)).forEach(m -> mealsTo.add(m));
+
         return null;
     }
 }
