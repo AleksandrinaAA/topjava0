@@ -11,9 +11,12 @@
     <meta charset="UTF-8">
     <title>Add meal</title>
 </head>
+<%--<form action="index">--%>
+<%--    <a href="index.jsp">back</a>--%>
+<%--</form>--%>
 <body>
 <h3>Add meal</h3>
-<form method="post">
+<form action="create" method="post">
     <label>DateTime</label><br>
     <input name="DateTime" type="datetime-local"/><br><br>
     <label>Description</label><br>

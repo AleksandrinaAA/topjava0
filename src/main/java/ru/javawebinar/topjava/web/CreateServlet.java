@@ -17,8 +17,8 @@ public class CreateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-//        getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
-        response.sendRedirect("create.jsp");
+        getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
+//        response.sendRedirect( "/create");
     }
 
     @Override
@@ -31,11 +31,13 @@ public class CreateServlet extends HttpServlet {
             int calories = Integer.parseInt(request.getParameter("Calories"));
 
             ListOfMeals.mealsTo.add(new UserMeal(dateTime,description,calories));
-            response.sendRedirect(request.getContextPath()+"/index");
+//            request.setAttribute("meals",ListOfMeals.mealsTo);
+//            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+            response.sendRedirect("index");
         }
         catch(Exception ex) {
-
-            getServletContext().getRequestDispatcher("create.jsp").forward(request, response);
+            System.out.println("Mistake");
+            getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
         }
     }
 }

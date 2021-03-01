@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -23,8 +24,8 @@ public class MealServlet extends HttpServlet {
         List<UserMealWithExcess> mealsWithExcess = UserMealsUtil.filteredByStreams(meals,LocalTime.of(0, 0), LocalTime.of(23, 0), 2000);
         request.setAttribute("meals", mealsWithExcess);
 
-//        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-        response.sendRedirect("index.jsp");
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
+//        response.sendRedirect("index.jsp");
     }
 
 //    @Override
