@@ -41,26 +41,6 @@ public class UserMealsUtil {
                         caloriesSumPerDay.get(dateTime.toLocalDate())>caloriesPerDay));
             }
         }
-//        List<UserMealWithExcess> mealsTo = new ArrayList<>();
-//        boolean excess = false;
-//        float Calories=0;
-//        for (int i=0; i<meals.size();i++){
-////            Cycles усложняют код. Смотри TimeComplexity
-//            for (int j=0; j<meals.size();j++){
-//                if (meals.get(j).getDateTime().getDayOfMonth()==meals.get(i).getDateTime().getDayOfMonth()){
-//                    Calories+=meals.get(j).getCalories();
-//                }
-//            }
-//            if(TimeUtil.isBetweenHalfOpen(LocalTime.of(meals.get(i).getDateTime().getHour(),meals.get(i).getDateTime().getMinute()),
-//                    startTime,endTime)){
-//                if (Calories>caloriesPerDay){
-//                    excess= true;
-//                }
-//                System.out.println(meals.get(i));
-//                mealsTo.add(new UserMealWithExcess(meals.get(i).getDateTime(),meals.get(i).getDescription(),meals.get(i).getCalories(),excess));
-//
-//            }
-//        }
 
         return mealExcess;
     }
